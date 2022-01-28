@@ -9,6 +9,7 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then take up to
         // the next )
         int currentIndex = 0;
+        char exclamationPoint = '!';
         while(currentIndex < markdown.length()) {
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
@@ -18,10 +19,16 @@ public class MarkdownParse {
             if (openParen == -1 || closeParen == -1 || openBracket == -1 || closeBracket == -1) {
                 break;
             }
-            if (closeBracket+1 == openParen) {
+
+            else if (openBracket > 0 && markdown.charAt(openBracket-1) == exclamationPoint) {
+                currentIndex = closeParen + 1;
+            }
+    
+            else if (closeBracket+1 == openParen) {
                 toReturn.add(markdown.substring(openParen+1, closeParen));
                 currentIndex = closeParen + 1;
             }
+
             else {
                 currentIndex = closeParen +1;
             }
