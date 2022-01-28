@@ -18,10 +18,12 @@ public class MarkdownParse {
             if (openParen == -1 || closeParen == -1 || openBracket == -1 || closeBracket == -1) {
                 break;
             }
-            else {
+            if (closeBracket+1 == openParen) {
                 toReturn.add(markdown.substring(openParen+1, closeParen));
                 currentIndex = closeParen + 1;
-                
+            }
+            else {
+                currentIndex = closeParen +1;
             }
         }
         return toReturn;
