@@ -10,20 +10,11 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
-            int imagePointer = markdown.indexOf("!", currentIndex);
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
-            if (imagePointer == openBracket-1) {
-                currentIndex++;
-                continue;
-            }
-            
-            if (markdown.charAt(closeBracket+1) != ('(')){
-                currentIndex++;
-                continue;
-            }
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf (")", openParen);
+            System.out.println(openBracket);
             if (openParen == -1 || closeParen == -1) {
                 break;
             }
@@ -32,8 +23,6 @@ public class MarkdownParse {
                 currentIndex = closeParen + 1;
             }
         }
-
-
         return toReturn;
     }
 
