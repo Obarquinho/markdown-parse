@@ -2,6 +2,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class MarkdownParse {
@@ -9,44 +10,42 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
+            //int imagePointer = markdown.indexOf("!", currentIndex);
             int imagePointer = markdown.indexOf("!", currentIndex);
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
-            if (imagePointer == openBracket-1) {
-                currentIndex++;
-                continue;
-            
-            if (markdown.charAt(closeBracket+1) != ('(')){
-                currentIndex++;
-                continue;
-            }
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf (")", openParen);
+            /*
+            if (markdown.charAt(closeBracket+1) != ('(')){
+                continue;
+            }
+            */
             if (openParen == -1 || closeParen == -1) {
                 break;
             }
             else {
                 toReturn.add(markdown.substring(openParen+1, closeParen));
-                currentIndex = closeParen + 1;
             }
-
-
-            /*
-            int nextOpenBracket = markdown.indexOf("[", currentIndex);
-            int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
-            int openParen = markdown.indexOf("(", currentIndex);
-            int closeParen = markdown.indexOf(")", openParen);
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
-
-             */
+            currentIndex++;
+            System.out.println(closeParen);
         }
+        System.out.println(markdown.charAt(40));
+        System.out.println(markdown.charAt(72));
         return toReturn;
     }
+    
+
     public static void main(String[] args) throws IOException {
-		Path fileName = Path.of(args[0]);
+		/*
+        Path fileName = Path.of(args[0]);
 	    String contents = Files.readString(fileName);
         ArrayList<String> links = getLinks(contents);
         System.out.println(links);
+        */
+
+        String filename="test-file.md";
+        Path pathToFile = Paths.get(filename);
+        System.out.println(pathToFile.toAbsolutePath());
     }
 }
