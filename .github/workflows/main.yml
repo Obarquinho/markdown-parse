@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: MarkdownParseJUnit
 
 # Controls when the workflow will run
 on:
@@ -27,6 +27,11 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: |
-          javac -cp lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:. *.java
-          java -cp lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar:. MarkdownParseTest
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run the JUnit Tests
+        run: | 
+          echo Running tests
+          javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar MarkdownParseTest.java
+          java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore MarkdownParseTest
