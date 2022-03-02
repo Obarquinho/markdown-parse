@@ -71,4 +71,28 @@ public class MarkdownParseTest {
         assertEquals(MarkdownParse.getLinks(contents), expect);
     }
 
+    @Test
+    public void snippet1() throws IOException {
+        String contents= Files.readString(Path.of(
+            "/Users/apollolarragoitia/Desktop/Desktop/WINTER 2021 UCSD/cs15l/lab3/markdown-parse/snippet1.md"));
+        List<String> expect = List.of("`google.com", "google.com" ,"ucsd.edu");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+
+    @Test
+    public void snippet2() throws IOException {
+        String contents= Files.readString(Path.of(
+            "/Users/apollolarragoitia/Desktop/Desktop/WINTER 2021 UCSD/cs15l/lab3/markdown-parse/snippet2.md"));
+        List<String> expect = List.of("a.com", "a.com(())", "example.com");
+        assertEquals(MarkdownParse.getLinks(contents), expect);
+    }
+
+    @Test
+    public void snippet3() throws IOException {
+        String contents= Files.readString(Path.of(
+            "/Users/apollolarragoitia/Desktop/Desktop/WINTER 2021 UCSD/cs15l/lab3/markdown-parse/snippet3.md"));
+        List<String> expect = List.of("https://ucsd-cse15l-w22.github.io/");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
 }
